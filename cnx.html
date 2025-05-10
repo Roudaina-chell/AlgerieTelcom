@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Algérie Télécom - Connexion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffffff;
+            color: #003f88;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            animation: fadeInBody 1.5s ease-out forwards;
+        }
+        
+        @keyframes fadeInBody {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 150px;
+            height: auto;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-30px);
+            animation: fadeSlideIn 1s ease-out 0.5s forwards;
+        }
+        
+        @keyframes fadeSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1400px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 63, 136, 0.2);
+            text-align: center;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeInUp 1s ease-out 0.6s forwards;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .left-panel {
+            flex: 1;
+            background: url('algtlc.jpg') no-repeat center;
+            background-size: cover;
+        }
+        
+        .right-panel {
+            flex: 1;
+            padding: 4rem;
+            background-color: #ffffff;
+            border-right: 5px solid #003f88;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #003f88;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeField 0.6s ease-out forwards;
+            animation-delay: 0.8s;
+        }
+        
+        p {
+            margin-bottom: 2rem;
+            opacity: 0.85;
+            font-size: 1.2rem;
+            color: #003f88;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeField 0.6s ease-out forwards;
+            animation-delay: 1s;
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        form input,
+        form .btn,
+        form .forgot,
+        form .inscription-btn {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeField 0.6s ease-out forwards;
+        }
+        
+        form input:nth-child(1) {
+            animation-delay: 1.2s;
+        }
+        
+        form input:nth-child(2) {
+            animation-delay: 1.4s;
+        }
+        
+        form .btn {
+            animation-delay: 1.6s;
+        }
+        
+        form .forgot {
+            animation-delay: 1.8s;
+        }
+        
+        form .inscription-btn {
+            animation-delay: 2s;
+        }
+        
+        @keyframes fadeField {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        input {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid #003f88;
+            border-radius: 12px;
+            outline: none;
+            background: #ffffff;
+            color: #003f88;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        input::placeholder {
+            color: rgba(0, 63, 136, 0.7);
+        }
+        
+        input:focus {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(0, 63, 136, 0.5);
+        }
+        
+        .btn {
+            background-color: #003f88;
+            color: #ffffff;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #0055cc;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 63, 136, 0.5);
+        }
+        
+        .forgot {
+            display: block;
+            margin-top: 1rem;
+            color: #003f88;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+        
+        .forgot:hover {
+            color: #0055cc;
+        }
+        
+        .inscription-btn {
+            background: none;
+            color: #003f88;
+            border: 1px solid #003f88;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: 0.3s;
+            margin-top: 0.5rem;
+        }
+        
+        .inscription-btn:hover {
+            background: #003f88;
+            color: #ffffff;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .left-panel {
+                height: 200px;
+            }
+            .right-panel {
+                padding: 2rem;
+                border-right: none;
+                border-top: 5px solid #003f88;
+            }
+            .logo {
+                width: 80px;
+                top: 10px;
+                left: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <img src="logoalg.png" alt="Logo" class="logo" />
+    <div class="container">
+        <div class="left-panel"></div>
+        <div class="right-panel">
+            <h2>Bienvenue chez Algérie Télécom 📡</h2>
+            <p>Nous rendons l'investissement immobilier accessible à tous !</p>
+            <form action="#" method="post">
+                <input type="email" name="email" placeholder="📧 Entrez votre e-mail" required />
+                <input type="password" name="password" placeholder="🔒 Entrez votre mot de passe" required />
+                <button type="submit" class="btn">Se connecter 🚀</button>
+                <a href="oubliermdps.html" class="forgot">Mot de passe oublié ? 🤔</a>
+                <a href="registre.html" class="inscription-btn">Créer un nouveau compte</a>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

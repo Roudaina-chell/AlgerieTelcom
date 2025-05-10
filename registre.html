@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inscription</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            animation: slideUp 1s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 150px;
+            height: auto;
+            animation: logoAppear 1.5s ease-out forwards;
+            z-index: 1000;
+        }
+        
+        @keyframes logoAppear {
+            0% {
+                opacity: 0;
+                transform: translateY(100px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .register-container {
+            width: 400px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 63, 136, 0.2);
+            padding: 40px;
+            text-align: center;
+        }
+        
+        h2 {
+            margin-bottom: 20px;
+            color: #003f88;
+        }
+        
+        .input-box {
+            margin: 15px 0;
+        }
+        
+        .input-box input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #003f88;
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: #003f88;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-top: 20px;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #0055cc;
+        }
+        
+        .home-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #003f88;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+        
+        @media (max-width: 500px) {
+            .register-container {
+                width: 90%;
+                padding: 20px;
+            }
+            .logo {
+                width: 120px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <img src="logoalg.png" alt="Logo" class="logo" />
+    <a href="home.html" class="home-btn">Home</a>
+
+    <div class="register-container">
+        <h2>Inscription</h2>
+        <div class="input-box">
+            <input type="text" placeholder="Nom d'utilisateur" required />
+        </div>
+        <div class="input-box">
+            <input type="email" placeholder="Email" required />
+        </div>
+        <div class="input-box">
+            <input type="password" placeholder="Mot de passe" required />
+        </div>
+        <div class="input-box">
+            <input type="password" placeholder="Confirmer le mot de passe" required />
+        </div>
+        <a href="infopersonal.html" class="btn">S'inscrire</a>
+    </div>
+</body>
+
+</html>

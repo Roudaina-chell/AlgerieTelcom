@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Informations Personnelles</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f0f4f8, #ffffff);
+            height: 100vh;
+            overflow-x: hidden;
+            animation: fadeIn 1s ease forwards;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .logo-background {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 220px;
+            z-index: 999;
+            transition: transform 0.4s ease, top 0.4s ease;
+        }
+        
+        .logo-move-right {
+            transform: translateX(300px) translateY(-5px);
+        }
+        
+        #menu-toggle {
+            position: fixed;
+            top: 130px;
+            left: 15px;
+            font-size: 20px;
+            cursor: pointer;
+            background: #003366;
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            z-index: 2001;
+            transition: transform 0.3s ease;
+        }
+        
+        #menu-toggle:hover {
+            transform: scale(1.05);
+        }
+        
+        #sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 320px;
+            height: 100%;
+            background: linear-gradient(180deg, #022548, #033a6b);
+            padding-top: 80px;
+            transition: all 0.3s ease;
+            transform: translateX(-100%);
+            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 1000;
+            overflow-y: auto;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        #sidebar.active {
+            transform: translateX(0);
+            visibility: visible;
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        #sidebar .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        #sidebar .close-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .sidebar-links {
+            margin-top: 100px;
+        }
+        
+        .sidebar-item,
+        .dropdown-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 25px;
+            font-size: 19px;
+            color: white;
+            text-decoration: none;
+            background: none;
+            border: none;
+            text-align: left;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        
+        .sidebar-item:hover,
+        .dropdown-btn:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid #00aaff;
+            padding-left: 30px;
+        }
+        
+        .dropdown-btn .arrow {
+            margin-left: auto;
+            transition: transform 0.3s ease;
+        }
+        
+        .dropdown-section.active .arrow {
+            transform: rotate(90deg);
+        }
+        
+        .dropdown-content {
+            background: #04407a;
+            padding-left: 10px;
+            border-left: 2px solid #007acc;
+            display: none;
+        }
+        
+        .dropdown-content a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            font-size: 17px;
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #005fa3;
+            color: #ffffff;
+        }
+        
+        .dropdown-section.active .dropdown-content {
+            display: block;
+        }
+        
+        .logout-section {
+            position: absolute;
+            bottom: 50px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .logout-section .sidebar-item {
+            justify-content: center;
+            color: #ffffff;
+            background-color: #ff4d4d;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 0 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .logout-section .sidebar-item:hover {
+            background-color: #cc0000;
+            transform: scale(1.05);
+        }
+        
+        .info-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 280px;
+            margin-top: 80px;
+        }
+        
+        .info-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+            animation: slideIn 0.7s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .info-image {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+        
+        .info-card h2 {
+            color: #003366;
+            margin-bottom: 25px;
+            font-size: 28px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group input {
+            width: 45%;
+            padding: 12px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
+        .edit-button {
+            margin-top: 25px;
+            background-color: #003366;
+            color: white;
+            padding: 12px 28px;
+            border: none;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .edit-button:hover {
+            background-color: #007acc;
+        }
+        /* تحسينات إضافية */
+        
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #28a745;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 6px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+            z-index: 2000;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .sidebar-item i,
+        .dropdown-btn i {
+            transition: transform 0.3s ease;
+        }
+        
+        .sidebar-item:hover i,
+        .dropdown-btn:hover i {
+            transform: scale(1.2);
+        }
+        
+        @media (max-width: 768px) {
+            .info-wrapper {
+                margin-left: 0;
+                padding: 20px;
+            }
+            #sidebar {
+                width: 100%;
+                border-radius: 0;
+            }
+            .logo-background {
+                width: 150px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <img src="logoalg.png" alt="Algerie Telecom Logo" class="logo-background" id="logo" />
+    <div id="menu-toggle" onclick="toggleSidebar()">☰</div>
+
+    <div id="sidebar">
+        <div class="close-btn" onclick="toggleSidebar()">×</div>
+        <div style="padding: 20px; font-size: 24px; color: white; font-weight: bold; text-align: center;">Menu</div>
+        <div class="sidebar-links">
+            <a href="home.html" class="sidebar-item"><i data-lucide="home"></i>Accueil</a>
+            <a href="infor-personnel.html" class="sidebar-item"><i data-lucide="file-text"></i>Infos Personnelles</a>
+            <a href="Inscription.html" class="sidebar-item"><i data-lucide="clipboard-edit"></i>Inscription du Projet</a>
+            <a href="rancencement.html" class="sidebar-item"><i data-lucide="map-pin"></i>Récensement</a>
+            <a href="Statistiaque.html" class="sidebar-item"><i data-lucide="bar-chart"></i>Statistiques</a>
+            <a href="Visualisation.html" class="sidebar-item"><i data-lucide="satellite-dish"></i>Visualisation</a>
+
+            <div class="dropdown-section">
+                <button class="dropdown-btn"><i data-lucide="folder"></i>Projet <span class="arrow">▶</span></button>
+                <div class="dropdown-content">
+                    <a href="ajouter.html"><i data-lucide="plus-circle"></i>Ajouter</a>
+                    <a href="modifier1.html"><i data-lucide="edit-3"></i>Modifier</a>
+                    <a href="info-validation-project.html"><i data-lucide="info"></i>Informations</a>
+                </div>
+            </div>
+
+            <div class="dropdown-section">
+                <button class="dropdown-btn"><i data-lucide="user"></i>Utilisateur <span class="arrow">▶</span></button>
+                <div class="dropdown-content">
+                    <a href="validation-user.html"><i data-lucide="check-circle"></i>Validation</a>
+                    <a href="affichage-user.html"><i data-lucide="eye"></i>Affichage</a>
+                </div>
+                <div class="logout-section">
+                    <a href="deconexion.html" class="sidebar-item"><i data-lucide="log-out"></i>Déconnexion</a>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="info-wrapper">
+        <div class="info-card">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="info-image" alt="Info Icon" />
+            <h2>Informations Personnelles</h2>
+            <div class="form-group">
+                <input type="text" placeholder="Nom" readonly>
+                <input type="text" placeholder="Prénom" readonly>
+            </div>
+            <div class="form-group">
+                <input type="text" placeholder="Grade" readonly>
+                <input type="text" placeholder="Matricule" readonly>
+            </div>
+            <div class="form-group">
+                <input type="password" placeholder="Mot de Passe" readonly>
+            </div>
+            <button class="edit-button" onclick="toggleEdit(this)">Modifier</button>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">Informations enregistrées avec succès !</div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById("sidebar");
+            const logo = document.getElementById("logo");
+            sidebar.classList.toggle("active");
+            logo.classList.toggle("logo-move-right");
+        }
+
+        document.querySelectorAll('.dropdown-btn').forEach((btn) => {
+            btn.addEventListener('click', function() {
+                const section = this.parentElement;
+                section.classList.toggle('active');
+            });
+        });
+
+        function toggleEdit(button) {
+            const inputs = document.querySelectorAll('.form-group input');
+            const toast = document.getElementById("toast");
+
+            if (button.innerText === "Modifier") {
+                inputs.forEach(inp => inp.removeAttribute("readonly"));
+                button.innerText = "Enregistré";
+                button.style.backgroundColor = "#28a745";
+            } else {
+                inputs.forEach(inp => inp.setAttribute("readonly", true));
+                button.innerText = "Modifier";
+                button.style.backgroundColor = "#003366";
+                toast.classList.add("show");
+                setTimeout(() => toast.classList.remove("show"), 2500);
+            }
+        }
+
+
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

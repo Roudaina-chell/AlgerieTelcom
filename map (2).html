@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Carte des communes de Guelma</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+            background: #f2f2f2;
+            margin: 0;
+            padding: 0 20px 40px;
+        }
+        
+        .logo-container {
+            text-align: left;
+            margin: 20px 0 -15px;
+        }
+        
+        .logo-container img {
+            height: 110px;
+        }
+        
+        header {
+            background-color: #003366;
+            color: white;
+            padding: 15px 20px;
+            font-size: 22px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin: 0 0 20px;
+            animation: fadeIn 1.2s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            text-align: center;
+        }
+        
+        .return-btn {
+            position: absolute;
+            right: 20px;
+            background-color: white;
+            color: #003366;
+            padding: 8px 18px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .return-btn:hover {
+            background-color: #e0e0e0;
+        }
+        
+        #map {
+            height: 600px;
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1.2s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .circle-marker {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .done {
+            background-color: #4CAF50;
+        }
+        
+        .in-progress {
+            background-color: #FFA000;
+        }
+        
+        .not-done {
+            background-color: #F44336;
+        }
+        
+        .legend {
+            background: white;
+            padding: 12px 18px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            text-align: center;
+            animation: fadeIn 1.2s ease-in-out;
+        }
+        
+        .legend button {
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 25px;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .legend .done-btn {
+            background-color: #4CAF50;
+        }
+        
+        .legend .in-progress-btn {
+            background-color: #FFA000;
+            color: black;
+        }
+        
+        .legend .not-done-btn {
+            background-color: #F44336;
+        }
+        
+        .legend .all-btn {
+            background-color: #003366;
+        }
+        
+        .legend button:hover {
+            opacity: 0.9;
+            transform: scale(1.05);
+        }
+        
+        .popup-card {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+            max-width: 250px;
+        }
+        
+        .popup-card h4 {
+            margin: 0 0 8px;
+            font-size: 18px;
+            color: #003366;
+        }
+        
+        .popup-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .popup-card ul li {
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+        
+        .popup-card strong {
+            color: #333;
+        }
+        
+        @media (max-width: 768px) {
+            #map {
+                height: 400px;
+            }
+            .legend {
+                font-size: 14px;
+                padding: 8px;
+            }
+            .legend button {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+            .logo-container img {
+                height: 50px;
+            }
+            .return-btn {
+                font-size: 14px;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="logo-container">
+        <img src="logoalg.png" alt="Logo">
+    </div>
+    <header>
+        Suivis d’Avancement des projets de la wilaya de Guelma
+        <a href="index.html" class="return-btn">Retour</a>
+    </header>
+
+    <div id="map"></div>
+
+    <div class="legend">
+        <button class="all-btn" onclick="filterMarkers('all')">Afficher tout</button>
+        <button class="done-btn" onclick="filterMarkers('done')">Réalisé</button>
+        <button class="in-progress-btn" onclick="filterMarkers('in-progress')">En cours</button>
+        <button class="not-done-btn" onclick="filterMarkers('not-done')">Non réalisé</button>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([36.4622, 7.4261], 10);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        const data = [{
+            coords: [36.4622, 7.4261],
+            status: 'done',
+            nomProjet: 'Guelma'
+        }, {
+            coords: [36.4700, 7.3782],
+            status: 'done',
+            nomProjet: 'Héliopolis'
+        }, {
+            coords: [36.4436, 7.3705],
+            status: 'done',
+            nomProjet: 'Beni Mezline'
+        }, {
+            coords: [36.4863, 7.3282],
+            status: 'in-progress',
+            nomProjet: 'Bouchegouf'
+        }, {
+            coords: [36.5040, 7.4367],
+            status: 'in-progress',
+            nomProjet: 'Aïn Ben Beida'
+        }, {
+            coords: [36.4171, 7.4083],
+            status: 'not-done',
+            nomProjet: 'Oued Zenati'
+        }];
+
+        const markers = [];
+
+        function getStatusLabel(status) {
+            if (status === 'done') return 'Réalisé';
+            if (status === 'in-progress') return 'En cours';
+            if (status === 'not-done') return 'Non réalisé';
+            return '';
+        }
+
+        function getStatusColor(status) {
+            if (status === 'done') return '#4CAF50';
+            if (status === 'in-progress') return '#FFA000';
+            if (status === 'not-done') return '#F44336';
+            return '#000';
+        }
+
+        data.forEach(function(markerInfo) {
+            const circleIcon = L.divIcon({
+                className: 'circle-marker ' + markerInfo.status
+            });
+
+            const marker = L.marker(markerInfo.coords, {
+                icon: circleIcon
+            }).addTo(map).bindPopup(`
+          <div class="popup-card">
+              <h4>${markerInfo.nomProjet}</h4>
+              <ul>
+                  <li><strong>Statut:</strong> <span style="color: ${getStatusColor(markerInfo.status)};">${getStatusLabel(markerInfo.status)}</span></li>
+                  <li><strong>Code géo:</strong> AUTO</li>
+                  <li><strong>Commune:</strong> AUTO</li>
+                  <li><strong>Localité:</strong> AUTO</li>
+                  <li><strong>Adresse:</strong> AUTO</li>
+                  <li><strong>Latitude:</strong> ${markerInfo.coords[0]}</li>
+                  <li><strong>Longitude:</strong> ${markerInfo.coords[1]}</li>
+                  <li><strong>Nombre de logements:</strong> AUTO</li>
+                  <li><strong>Formule:</strong> AUTO</li>
+                  <li><strong>Type de construction:</strong> AUTO</li>
+                  <li><strong>Avancement:</strong> AUTO %</li>
+                  <li><strong>Taux d’occupation:</strong> AUTO %</li>
+                  <li><strong>Statut canalisation:</strong> AUTO</li>
+                  <li><strong>Logements recensés:</strong> AUTO</li>
+                  <li><strong>Locaux commerciaux:</strong> AUTO</li>
+                  <li><strong>Nombre de blocs:</strong> AUTO</li>
+                  <li><strong>Estimation canalisation:</strong> AUTO</li>
+                  <li><strong>Estimation câble:</strong> AUTO</li>
+                  <li><strong>Observation:</strong> AUTO</li>
+              </ul>
+          </div>
+      `);
+
+            marker.status = markerInfo.status;
+            markers.push(marker);
+        });
+
+        function filterMarkers(status) {
+            markers.forEach(function(marker) {
+                if (status === 'all') {
+                    map.addLayer(marker);
+                } else {
+                    if (marker.status === status) {
+                        map.addLayer(marker);
+                    } else {
+                        map.removeLayer(marker);
+                    }
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>

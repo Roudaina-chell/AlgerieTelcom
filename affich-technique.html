@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>insrciption</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7fb;
+            margin: 0;
+            padding: 2rem;
+        }
+        
+        .form-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            max-width: 900px;
+            margin: auto;
+            padding: 2rem;
+        }
+        
+        .form-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #111827;
+            border-bottom: 2px solid rgb(5, 6, 45);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 1rem;
+        }
+        
+        label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #003366;
+        }
+        
+        input {
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        
+        input:focus {
+            border-color: rgb(5, 6, 45);
+        }
+        
+        .btn-submit {
+            margin-top: 2rem;
+            padding: 0.75rem 2rem;
+            background-color: rgb(5, 6, 45);
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn-submit:hover {
+            background-color: #003366;
+        }
+        
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!DOCTYPE html>
+    <html lang="fr">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>insrciption</title>
+        <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+        <style>
+            body {
+                font-family: 'Arial', sans-serif;
+                background-color: #f4f7fb;
+                margin: 0;
+                padding: 2rem;
+            }
+            
+            .form-container {
+                background-color: white;
+                border-radius: 12px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+                max-width: 900px;
+                margin: auto;
+                padding: 2rem;
+            }
+            
+            .logo {
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                width: 150px;
+                height: auto;
+                animation: logoAppear 1.5s ease-out forwards;
+                z-index: 1000;
+            }
+            
+            .form-title {
+                font-size: 24px;
+                font-weight: bold;
+                color: #111827;
+                border-bottom: 2px solid rgb(5, 6, 45);
+                padding-bottom: 1rem;
+                margin-bottom: 2rem;
+            }
+            
+            .form-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .form-group {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            label {
+                margin-bottom: 0.5rem;
+                font-weight: 500;
+                color: #1f2937;
+            }
+            
+            input,
+            textarea {
+                padding: 0.75rem;
+                border: 1px solid #d1d5db;
+                border-radius: 8px;
+                font-size: 14px;
+                outline: none;
+                transition: border-color 0.3s ease;
+            }
+            
+            .form-control {
+                padding: 0.75rem;
+                border: 1px solid #d1d5db;
+                border-radius: 8px;
+                font-size: 14px;
+                outline: none;
+                transition: border-color 0.3s ease;
+                background-color: white;
+            }
+            
+            .form-control:focus {
+                border-color: rgb(5, 6, 45);
+            }
+            
+            input:focus,
+            textarea:focus {
+                border-color: rgb(5, 6, 45);
+                ;
+            }
+            
+            textarea {
+                resize: vertical;
+                min-height: 100px;
+            }
+            
+            .btn-submit {
+                margin-top: 2rem;
+                padding: 0.75rem 2rem;
+                background-color: rgb(5, 6, 45);
+                color: white;
+                font-weight: bold;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+            
+            .return-button {
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                align-items: center;
+                background-image: linear-gradient(144deg, #1c0f59, #180f51 50%, #0d0b3c);
+                border: 0;
+                border-radius: 8px;
+                box-shadow: rgba(18, 18, 88, 0.2) 0 15px 30px -5px;
+                box-sizing: border-box;
+                color: #ffffff;
+                display: flex;
+                font-size: 18px;
+                justify-content: center;
+                line-height: 1em;
+                min-width: 140px;
+                padding: 3px;
+                text-decoration: none;
+                cursor: pointer;
+                transition: all 0.3s;
+                z-index: 1000;
+            }
+            
+            .return-button span {
+                background-color: rgb(10, 12, 119);
+                padding: 16px 24px;
+                border-radius: 6px;
+                width: 100%;
+                height: 100%;
+                transition: 300ms;
+            }
+            
+            .return-button:hover span {
+                background: none;
+            }
+            
+            .return-button:active {
+                transform: scale(0.9);
+            }
+            
+            .btn-submit:hover {
+                background-color: rgb(8, 10, 109);
+            }
+            
+            @media (max-width: 768px) {
+                .form-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+            
+            .logo {
+                width: 120px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <img src="logoalg.png" alt="Logo" class="logo" />
+        <div class="form-container">
+            <div class="form-title">Ajouter un projet </div>
+            <form>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="altitude">Altitude</label>
+                        <input type="numbre" id="altitude" name="altitude" required placeholder="Entrer l'altitude">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="longitude">Longitude</label>
+                        <input type="numbre" id="longitude" name="longitude" required placeholder="Entrer longitude">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nbrLogement">Nombre de logements</label>
+                        <input type="numbre" id="nbrLogement" name="nbrLogement" required placeholder="Entrer le nombre de logements">
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="formuleLogement">Formule de logement</label>
+                        <select id="formuleLogement" name="formuleLogement" class="form-control">
+                    
+                    <option>BATIMENT</option>
+                    <option>PAVILLONNAIRE</option>
+                    <option>SOCIAL</option>
+                    
+                    <option>LPA</option>
+                    <option>PROMOTTIONNELLE</option>
+                </select>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="locauxCommerciaux">Nombre de locaux commerciaux</label>
+                        <input type="numbre" id="locauxCommerciaux" name="locauxCommerciaux" required placeholder="Entrer le nombre de locaux commerciaux">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nbrBloc">Nombre de blocs</label>
+                        <input type="numbre" id="nbrBloc" name="nbrBloc" required placeholder="Entrer le nombre de blocs">
+                    </div>
+                    <div class="form-group">
+                        <label for="typeConstruction">Type de construction</label>
+                        <select id="formuleLogement" name="formuleLogement" class="form-control">
+                    
+                <option>Individuelle villa</option>
+                <option>Individuelle pavillon</option>
+                <option>Individuelle maison</option>
+                
+                <option>Individuelle traditionnelle</option>
+                <option>collectifs batiments R+3 et plus</option>
+            </select>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="etatAvancement">État d'avancement</label>
+                        <input type="text" id="etatAvancement" name="etatAvancement" required placeholder="Entrer l'état d'avancement">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tauxOccupation">Taux d’occupation</label>
+                        <input type="text" id="tauxOccupation" name="tauxOccupation" required placeholder="Entrer le taux d'occupation">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="techDot">Technologie par Dot</label>
+                        <select id="techDot" name="techDot" class="form-control">
+                    
+                <option>FTTH</option>
+                <option>4G</option>
+                
+                
+                
+            </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="observation">Observation</label>
+                        <select id="formuleLogement" name="formuleLogement" class="form-control">
+                    
+                <option>réalisé</option>
+                <option>non réalisé</option>
+                
+                
+                
+            </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="statutCanalisation">Statut de la canalisation</label>
+                        <select id="formuleLogement" name="formuleLogement" class="form-control">
+                    
+                <option>réalisé</option>
+                <option>non réalisé</option>
+                
+                
+                
+            </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit">Enreg</button>
+        </div>
+
+        </form>
+        <button class="return-button" onclick="goBack()">
+        <span class="text">Retour</span>
+      </button>
+        </div>
+
+    </body>
+
+    </html>
+    <script>
+        function goBack() {
+            window.location.href = "technique.html";
+        }
+    </script>
+
+
+    </form>
+    </div>
+</body>
+
+</html>

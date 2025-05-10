@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algerie Telecom Projects</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+        
+        body {
+            background: url('./BGH.jpg') no-repeat center center fixed;
+            background-size: cover;
+            animation: moveBackground 10s infinite alternate ease-in-out;
+            color: white;
+            line-height: 1.8;
+        }
+        
+        @keyframes moveBackground {
+            from {
+                background-position: center 0px;
+            }
+            to {
+                background-position: center 80px;
+            }
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: rgba(7, 25, 56, 0.9);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.5s ease-in-out;
+            animation: fadeInDown 1s ease-in-out;
+        }
+        
+        .logo img {
+            height: 150px;
+            width: auto;
+            transition: transform 0.5s ease-in-out;
+            animation: rotateIn 1.5s ease-in-out;
+        }
+        
+        .logo img:hover {
+            transform: scale(1.1);
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+        
+        nav ul li {
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInUp 1s ease-in-out forwards;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: 400;
+            transition: color 0.3s ease-in-out;
+            font-size: 18px;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+        
+        nav ul li a:hover {
+            color: #50b5ff;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .menu-btn {
+            background-color: #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: white;
+            text-decoration: none;
+            display: none;
+            transition: background-color 0.3s ease;
+        }
+        
+        .menu-btn:hover {
+            background-color: #003366;
+        }
+        
+        .hero {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+            text-align: center;
+        }
+        
+        .text h1 {
+            font-size: 50px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateY(-30px);
+            animation: fadeInUp 1.5s ease-out forwards;
+        }
+        
+        .text p {
+            font-size: 20px;
+            color: #b0c4ff;
+            font-weight: 300;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1.8s ease-out forwards;
+        }
+        
+        section {
+            padding: 50px 20px;
+        }
+        
+        h2 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        
+        .card-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            width: 280px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+        
+        .card:hover {
+            transform: scale(1.05);
+        }
+        
+        footer {
+            position: relative;
+            width: 100%;
+            background-color: rgba(5, 16, 34, 0.9);
+            padding: 10px 5px;
+            text-align: center;
+            font-size: 14px;
+            animation: fadeIn 2s ease-in-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes rotateIn {
+            from {
+                opacity: 0;
+                transform: rotate(-180deg);
+            }
+            to {
+                opacity: 1;
+                transform: rotate(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 15px;
+            }
+            nav ul {
+                display: none;
+            }
+            .menu-btn {
+                display: block;
+            }
+            .logo img {
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="logoalg.png" alt="Algerie Telecom Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="home.html">🏠 Home</a></li>
+                <li><a href="cnx.html">🔑 Connexion</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="text">
+            <h1>ALGERIE TELECOM PROJECTS</h1>
+            <p>Explore our latest telecommunication projects and innovations.</p>
+        </div>
+    </section>
+
+    <!-- Aperçu des projets -->
+    <section>
+        <h2 class="animate_animated animate_fadeInUp">Nos Derniers Projets</h2>
+        <div class="card-container">
+            <div class="card animate_animated animatefadeInUp animate_delay-1s">
+                <h3>Fibre Optique</h3>
+                <p>Déploiement rapide dans 12 wilayas.</p>
+            </div>
+            <div class="card animate_animated animatefadeInUp animate_delay-2s">
+                <h3>4G Entreprise</h3>
+                <p>Connexion fiable pour professionnels.</p>
+            </div>
+            <div class="card animate_animated animatefadeInUp animate_delay-3s">
+                <h3>Smart City</h3>
+                <p>Technologies IoT pour les villes modernes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nos services -->
+    <section>
+        <h2 class="animate_animated animate_fadeInUp">Nos Services</h2>
+        <div class="card-container">
+            <div class="card animate_animated animatefadeInUp animate_delay-1s">
+                <h3>ADSL / Fibre</h3>
+                <p>Internet haut débit pour tous les foyers.</p>
+            </div>
+            <div class="card animate_animated animatefadeInUp animate_delay-2s">
+                <h3>Forfaits Mobile</h3>
+                <p>Des offres adaptées à vos besoins.</p>
+            </div>
+            <div class="card animate_animated animatefadeInUp animate_delay-3s">
+                <h3>Services Entreprise</h3>
+                <p>Solutions globales pour entreprises.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Algerie Telecom. All rights reserved.</p>
+    </footer>
+
+    <script>
+        ScrollReveal().reveal('.text h1', {
+            delay: 300
+        });
+        ScrollReveal().reveal('.text p', {
+            delay: 600
+        });
+        ScrollReveal().reveal('footer', {
+            delay: 900
+        });
+        ScrollReveal().reveal('.card', {
+            interval: 200
+        });
+    </script>
+</body>
+
+</html>
